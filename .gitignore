@@ -4,6 +4,7 @@
 
 .history
 .env
+yarn.lock
 
 # Logs
 logs

@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
-import { PaginationArgs } from './arguments/pagination-args';
 import { Users } from './entities/users.entity';
+import { UsersArgument } from './dto/users.argument';
+import { Prisma } from '@prisma/client';
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
@@ -14,16 +15,25 @@ export class UserService {
     });
   }
 
-  async findAll(paginationArgs: PaginationArgs) {
+  async findAll(usersArgument: UsersArgument) {
+    const where: Prisma.UserWhereInput = {
+      email: {
+        contains: usersArgument.email,
+      },
+      name: {
+        contains: usersArgument.name,
+      },
+    };
     const user = await this.prisma.user.findMany({
-      skip: paginationArgs.first * (paginationArgs.page - 1),
-      take: paginationArgs.first,
+      skip: usersArgument.first * (usersArgument.page - 1),
+      take: usersArgument.first,
+      where,
     });
-    const count = await this.prisma.user.count();
-    const totalPage = Math.ceil(count / paginationArgs.first);
+    const count = await this.prisma.user.count({ where });
+    const totalPage = Math.ceil(count / usersArgument.first);
 
     const users: Users = {
-      currentPage: paginationArgs.page,
+      currentPage: usersArgument.page,
       totalPage: totalPage,
       totalCount: count,
       nodes: [...user],

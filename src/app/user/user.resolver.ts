@@ -4,7 +4,9 @@ import { User } from './entities/user.entity';
 import { Users } from './entities/users.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
-import { PaginationArgs } from './arguments/pagination-args';
+// import { PaginationArgs } from '../utils/pagination-args/pagination-args';
+// import { OffsetPaginatedArgs } from '../abstaction/offset-paginated';
+import { UsersArgument } from './dto/users.argument';
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
@@ -15,7 +17,7 @@ export class UserResolver {
   }
 
   @Query(() => Users, { name: 'users' })
-  async users(@Args() args: PaginationArgs) {
+  async users(@Args() args: UsersArgument) {
     const users: Users = await this.userService.findAll(args);
 
     return users;

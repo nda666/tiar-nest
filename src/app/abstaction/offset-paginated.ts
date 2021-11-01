@@ -1,11 +1,27 @@
-import { Field, ObjectType, Int } from '@nestjs/graphql';
+import { Field, ObjectType, Int, ArgsType } from '@nestjs/graphql';
 import { Type } from '@nestjs/common';
+
+export interface IOffsetPaginatedArgs {
+  page: number;
+  first: number;
+}
 
 export interface IOffsetPaginatedType<T> {
   nodes: T[];
   currentPage: number;
   totalPage: number;
   totalCount: number;
+}
+export function OffsetPaginatedArgs() {
+  @ArgsType()
+  abstract class OffsetPaginatedArgsType implements IOffsetPaginatedArgs {
+    @Field((type) => Int, { defaultValue: 1 })
+    page: number;
+
+    @Field((type) => Int, { defaultValue: 10 })
+    first: number;
+  }
+  return OffsetPaginatedArgsType as Type<IOffsetPaginatedArgs>;
 }
 
 export function OffsetPaginated<T>(
@@ -25,5 +41,6 @@ export function OffsetPaginated<T>(
     @Field((type) => Int)
     currentPage: number;
   }
+
   return OffsetPaginatedType as Type<IOffsetPaginatedType<T>>;
 }

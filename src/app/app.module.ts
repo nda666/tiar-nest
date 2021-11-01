@@ -1,5 +1,3 @@
-
-
 import { Module } from '@nestjs/common';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
@@ -12,7 +10,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import config from '../configs/config';
 import { GraphqlConfig } from '../configs/config.interface';
 import { UserModule } from './user/user.module';
-import { AppResolver } from './resolvers/app.resolver';
+import { PrismaService } from './prisma/prisma.service';
 
 const dailyRotateFile = new winston.transports.DailyRotateFile({
   filename: 'application-%DATE%.log',
@@ -21,12 +19,12 @@ const dailyRotateFile = new winston.transports.DailyRotateFile({
   maxSize: '20m',
   maxFiles: '14d',
   dirname: join(__dirname, './../logs/'), //path to where save lo
-  level: 'error'
+  level: 'error',
 });
 
-const errorStackTracerFormat = winston.format(info => {
+const errorStackTracerFormat = winston.format((info) => {
   if (info.meta && info.meta instanceof Error) {
-      info.message = `${info.message} ${info.meta.stack}`;
+    info.message = `${info.message} ${info.meta.stack}`;
   }
   return info;
 });
@@ -35,13 +33,14 @@ const errorStackTracerFormat = winston.format(info => {
   imports: [
     ConfigModule.forRoot({
       envFilePath: ['.env.development'],
-      isGlobal: true, load: [config]
+      isGlobal: true,
+      load: [config],
     }),
 
     /**
      * Graphql
      */
-     GraphQLModule.forRootAsync({
+    GraphQLModule.forRootAsync({
       useFactory: async (configService: ConfigService) => {
         const graphqlConfig = configService.get<GraphqlConfig>('graphql');
         return {
@@ -60,9 +59,6 @@ const errorStackTracerFormat = winston.format(info => {
       inject: [ConfigService],
     }),
 
-
-   
-
     /**
      * Client frontend
      */
@@ -70,7 +66,7 @@ const errorStackTracerFormat = winston.format(info => {
     //     rootPath: join(__dirname, '..', '../client/dist'),
     // }),
 
-     /**
+    /**
      * Admin frontend
      */
     // ServeStaticModule.forRoot({
@@ -85,7 +81,7 @@ const errorStackTracerFormat = winston.format(info => {
       format: winston.format.combine(
         winston.format.timestamp(),
         winston.format.prettyPrint(),
-        errorStackTracerFormat()
+        errorStackTracerFormat(),
       ),
       transports: [dailyRotateFile, new winston.transports.Console()],
     }),
@@ -100,8 +96,8 @@ const errorStackTracerFormat = winston.format(info => {
       },
       prefix: 'myapp_',
     }),
-    UserModule
+    UserModule,
   ],
-  providers: [ AppModule, AppResolver],
+  providers: [AppModule],
 })
 export class AppModule {}

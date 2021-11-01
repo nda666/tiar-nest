@@ -15,10 +15,8 @@ type Mutation {
 }
 
 type Query {
-  hello(name: String!): String!
-  helloWorld: String!
   user(id: Int!): User!
-  users(first: Int = 10, page: Int = 1): Users!
+  users(email: String, first: Int = 10, name: String, page: Int = 1): Users!
 }
 
 input UpdateUserInput {
