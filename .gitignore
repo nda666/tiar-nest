@@ -5,6 +5,8 @@
 .history
 .env
 yarn.lock
+.yarn*
+
 
 # Logs
 logs

@@ -1,15 +1,15 @@
 import { Config } from './config.interface';
 
 const config: Config = {
-  app: {
+  nest: {
+    port: parseInt(process.env.NEST_PORT, 10) || 3000,
+  },
+  seo: {
     name: process.env.APP_NAME || 'Tiar Nest',
     url: process.env.APP_URL || 'Tiar Nest',
     twitter: {
       url: process.env.APP_TWITTER_NAME || '@',
-    }
-  },
-  nest: {
-    port:  parseInt(process.env.NEST_PORT, 10) || 3000,
+    },
   },
   cors: {
     enabled: true,

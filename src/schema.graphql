@@ -5,6 +5,7 @@
 input CreateUserInput {
   email: String!
   name: String
+  password: String!
   phone: String!
 }
 
@@ -20,10 +21,10 @@ type Query {
 }
 
 input UpdateUserInput {
-  email: String
+  email: String!
   id: Int!
   name: String
-  phone: String
+  phone: String!
 }
 
 type User {

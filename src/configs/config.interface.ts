@@ -1,5 +1,5 @@
 export interface Config {
-  app: ApplicationConfig;
+  seo: DefaultSeoConfig;
   nest: NestConfig;
   cors: CorsConfig;
   swagger: SwaggerConfig;
@@ -7,12 +7,12 @@ export interface Config {
   security: SecurityConfig;
 }
 
-export interface ApplicationConfig{
-  name: String,
-  url: String,
+export interface DefaultSeoConfig {
+  name: string;
+  url: string;
   twitter: {
-    url: String
-  }
+    url: string;
+  };
 }
 
 export interface NestConfig {

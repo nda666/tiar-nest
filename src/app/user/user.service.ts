@@ -5,6 +5,7 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { Users } from './entities/users.entity';
 import { UsersArgument } from './dto/users.argument';
 import { Prisma } from '@prisma/client';
+
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
@@ -27,7 +28,7 @@ export class UserService {
     const user = await this.prisma.user.findMany({
       skip: usersArgument.first * (usersArgument.page - 1),
       take: usersArgument.first,
-      where,
+      where: {},
     });
     const count = await this.prisma.user.count({ where });
     const totalPage = Math.ceil(count / usersArgument.first);
@@ -42,15 +43,30 @@ export class UserService {
     return users;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    return this.prisma.user.findFirst({
+      where: {
+        id,
+      },
+    });
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserInput: UpdateUserInput) {
+    return this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        ...updateUserInput,
+      },
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    return this.prisma.user.delete({
+      where: {
+        id,
+      },
+    });
   }
 }

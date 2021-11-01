@@ -16,7 +16,7 @@
     "start:debug": "nest start --debug --watch --preserveWatchOutput",
     "start:prod": "NODE_ENV=production node dist/src/main",
     "lint": "eslint \"{src,test}/**/*.{ts,tsx}\"",
-    "test": "jest --collect-coverage --setupFiles dotenv-flow/config",
+    "test": "jest --collect-coverage",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
@@ -26,8 +26,6 @@
     "client:generate:schema": "zeus src/schema.gql src/client/app/types --ts"
   },
   "dependencies": {
-    
-   
     "@nestjs/bull": "^0.4.1",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.0.2",
@@ -54,7 +52,6 @@
     "helmet": "^4.6.0",
     "nest-winston": "^1.6.1",
     "nestjs-redoc": "^2.2.2",
-    
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
     "react": "17.0.2",
@@ -80,8 +77,8 @@
     "@types/passport-local": "^1.0.34",
     "@types/react": "17.0.27",
     "@types/supertest": "^2.0.11",
-    "@typescript-eslint/eslint-plugin": "^4.28.2",
-    "@typescript-eslint/parser": "^4.28.2",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
     "css-loader": "^6.3.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -118,5 +115,6 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "packageManager": "yarn@3.1.0"
 }
