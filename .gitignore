@@ -3,12 +3,13 @@
 /node_modules
 
 # tiar
+yarn.lock
 .vscode
 .history
 .env
 .env.production
-yarn.lock
-.yarn*
+.yarn
+
 storage
 audit.json
 
