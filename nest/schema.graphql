@@ -1,0 +1,267 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  removeUser(id: Int!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+}
+
+input NestedIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+type Profile {
+  bio: String!
+  createdAt: DateTime!
+  id: ID!
+  updatedAt: DateTime!
+  user: User!
+  userId: Int!
+}
+
+type ProfileAvgAggregate {
+  id: Float
+  userId: Float
+}
+
+type ProfileCountAggregate {
+  _all: Int!
+  bio: Int!
+  createdAt: Int!
+  id: Int!
+  updatedAt: Int!
+  userId: Int!
+}
+
+type ProfileMaxAggregate {
+  bio: String
+  createdAt: DateTime
+  id: Int
+  updatedAt: DateTime
+  userId: Int
+}
+
+type ProfileMinAggregate {
+  bio: String
+  createdAt: DateTime
+  id: Int
+  updatedAt: DateTime
+  userId: Int
+}
+
+type ProfileSumAggregate {
+  id: Int
+  userId: Int
+}
+
+type Query {
+  user(id: Int!): User!
+  users(distinct: [UserScalarFieldEnum!], orderBy: [UserOrderByWithRelationInput!], page: Int, take: Int, where: UserWhereInput): UsersPaginated!
+}
+
+enum Role {
+  ADMIN
+  SUPERADMIN
+  USER
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+type User {
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  name: String
+  phone: String!
+  profile: Profile
+  role: Role!
+  updatedAt: DateTime
+}
+
+type UserAvgAggregate {
+  id: Float
+}
+
+type UserCountAggregate {
+  _all: Int!
+  createdAt: Int!
+  email: Int!
+  id: Int!
+  name: Int!
+  phone: Int!
+  role: Int!
+  updatedAt: Int!
+}
+
+input UserCreateInput {
+  email: String!
+  name: String
+  password: String!
+  phone: String!
+}
+
+type UserMaxAggregate {
+  createdAt: DateTime
+  email: String
+  id: Int
+  name: String
+  phone: String
+  role: Role
+  updatedAt: DateTime
+}
+
+type UserMinAggregate {
+  createdAt: DateTime
+  email: String
+  id: Int
+  name: String
+  phone: String
+  role: Role
+  updatedAt: DateTime
+}
+
+input UserOrderByWithRelationInput {
+  email: SortOrder
+  id: SortOrder
+  name: SortOrder
+  password: SortOrder
+  phone: SortOrder
+}
+
+enum UserScalarFieldEnum {
+  createdAt
+  email
+  id
+  name
+  password
+  phone
+  role
+  updatedAt
+}
+
+type UserSumAggregate {
+  id: Int
+}
+
+input UserUpdateInput {
+  email: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  phone: StringFieldUpdateOperationsInput
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  email: StringFilter
+  id: IntFilter
+  name: StringNullableFilter
+  password: StringFilter
+  phone: StringFilter
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: Int
+  phone: String
+}
+
+type UsersPaginated {
+  currentPage: Int!
+  nodes: [User!]
+  totalCount: Int!
+  totalPage: Int
+}

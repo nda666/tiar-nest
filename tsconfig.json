@@ -1,30 +1,31 @@
 {
   "compilerOptions": {
-    
     "jsx": "preserve",
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
-  
-    "experimentalDecorators": true, 
-    "emitDecoratorMetadata": true, 
+    "esModuleInterop": true,
+    "sourceRoot": "nest",
+    "paths": {
+      "@nest-modules/*": ["nest/app/modules/*"],
+      "@nest-utils/*": ["nest/app/utils/*"],
+      "@nest-apps/*": ["nest/app/*"],
+      "@nest-config/*": ["nest/configs/*"]
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
-    
     "allowSyntheticDefaultImports": true,
     "target": "es2017",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./dist/main",
     "baseUrl": "./",
-    
     "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "noImplicitAny": true,
     "strictBindCallApply": false,
-    
 
-    "noFallthroughCasesInSwitch": false,
-    
-  },
-  
+    "noFallthroughCasesInSwitch": false
+  }
 }

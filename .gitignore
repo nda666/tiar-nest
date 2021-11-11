@@ -2,11 +2,14 @@
 /dist
 /node_modules
 
+# tiar
+.vscode
 .history
 .env
+.env.production
 yarn.lock
 .yarn*
-
+storage
 
 # Logs
 logs

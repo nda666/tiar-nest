@@ -1,0 +1,44 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "audit.json",
+    "files": [
+        {
+            "date": 1636184236920,
+            "name": "/run/media/tiar/Website/www/tiar-nest/logs/application-2021-11-06.log",
+            "hash": "068fc4a8bf0c32ff32401f2fa457eebc"
+        },
+        {
+            "date": 1636338381190,
+            "name": "/run/media/tiar/Website/www/tiar-nest/logs/application-2021-11-08.log",
+            "hash": "6f65df4c893358961fa17b84b2998f76"
+        },
+        {
+            "date": 1636352072617,
+            "name": "/run/media/tiar/Website/www/tiar-nest/dist/logs/application-2021-11-08.log",
+            "hash": "581d3ef8b72485bb89292d5d5c69cfb1"
+        },
+        {
+            "date": 1636444155746,
+            "name": "/run/media/tiar/Website/www/tiar-nest/logs/application-2021-11-09.log",
+            "hash": "4ab793db2c9433747f688d07269d7006"
+        },
+        {
+            "date": 1636507733988,
+            "name": "/run/media/tiar/Website/www/tiar-nest/logs/application-2021-11-10.log",
+            "hash": "faf90411792cbdd319c98b7b0900253a"
+        },
+        {
+            "date": 1636597634519,
+            "name": "/run/media/tiar/Website/www/tiar-nest/logs/application-2021-11-11.log",
+            "hash": "80fe41eac6dfd904da433f42294c32a9"
+        },
+        {
+            "date": 1636621793324,
+            "name": "/run/media/tiar/Website/www/tiar-nest/dist/logs/application-2021-11-11.log",
+            "hash": "0b35c7ccabc8e9a4c73596f0f861c875"
+        }
+    ]
+}

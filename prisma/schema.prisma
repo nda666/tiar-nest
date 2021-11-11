@@ -2,26 +2,66 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator nestgraphql {
+  provider               = "node node_modules/prisma-nestjs-graphql"
+  output                 = "../nest/app/models"
+  fields_Validator_from  = "class-validator"
+  fields_Validator_input = true
+  emitSingle             = true
+
+  decorate_1_type      = "CreateOneUserArgs"
+  decorate_1_field     = data
+  decorate_1_name      = ValidateNested
+  decorate_1_from      = "class-validator"
+  decorate_1_arguments = "[]"
+  decorate_2_type      = "CreateOneUserArgs"
+  decorate_2_field     = data
+  decorate_2_from      = "class-transformer"
+  decorate_2_arguments = "['() => {propertyType.0}']"
+  decorate_2_name      = Type
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  phone   String   @unique
+  id Int @id @default(autoincrement())
+
+  /// @Validator.MinLength(3)
+  /// @Validator.IsEmail()
+  email String @unique
+
+  phone String @unique
+
+  /// @HideField()
   password String
-  name    String?
-  role    Role     @default(USER)
+  name     String?
+
+  /// @HideField({ input: true, output: false })
+  role Role @default(USER)
+
+  /// @HideField({ input: true, output: false })
   profile Profile?
+
+  /// @HideField({ input: true, output: false })
+  createdAt DateTime @default(now())
+
+  /// @HideField({ input: true, output: false })
+  updatedAt DateTime? @updatedAt
+  @@map("users")
 }
 
 model Profile {
-  id     Int    @id @default(autoincrement())
-  bio    String
-  userId Int    @unique
-  user   User   @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  bio       String
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("profiles")
 }
 
 enum Role {
