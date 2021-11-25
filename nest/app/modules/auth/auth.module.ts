@@ -15,7 +15,7 @@ import { PrismaService } from 'nest/app/providers/prisma/prisma.service';
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<NestConfig>('nest')?.jwtSecret,
+        secret: configService.get('jwt')?.jwtSecret,
         signOptions: { expiresIn: '120s' },
       }),
       inject: [ConfigService],

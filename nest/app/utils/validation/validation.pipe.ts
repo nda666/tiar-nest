@@ -2,7 +2,7 @@ import {
   PipeTransform,
   Injectable,
   ArgumentMetadata,
-  BadRequestException,
+  MisdirectedException,
 } from '@nestjs/common';
 import { validate, ValidationError } from 'class-validator';
 import { plainToClass } from 'class-transformer';
@@ -19,10 +19,12 @@ export class ValidationPipe implements PipeTransform<any> {
       return value;
     }
     const object = plainToClass(metatype, value);
-    const errors = await validate(object);
+    const errors = await validate(object, {
+      forbidUnknownValues: true,
+    });
     if (errors.length > 0) {
       const errorMessage = this.buildMessage(errors);
-      throw new BadRequestException(errorMessage);
+      throw new MisdirectedException(errorMessage);
     }
     return value;
   }

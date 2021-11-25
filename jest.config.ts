@@ -10,7 +10,7 @@ const config: Config.InitialOptions = {
   collectCoverageFrom: ['src/server/**/*.(t|j)s'],
   coveragePathIgnorePatterns: ['src/server/console', 'src/server/migration'],
   coverageDirectory: 'coverage',
-  testEnvironment: 'node',
+  testEnvironment: 'test',
 };
 
 export default config;

@@ -39,6 +39,11 @@
             "date": 1636621793324,
             "name": "/run/media/tiar/Website/www/tiar-nest/dist/logs/application-2021-11-11.log",
             "hash": "0b35c7ccabc8e9a4c73596f0f861c875"
+        },
+        {
+            "date": 1636680778993,
+            "name": "/run/media/tiar/Website/www/tiar-nest/logs/application-2021-11-12.log",
+            "hash": "75c675ff7e438c58bc32e349f6318e6a"
         }
     ]
 }

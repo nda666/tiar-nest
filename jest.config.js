@@ -7,8 +7,8 @@ const config = {
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
-  collectCoverageFrom: ['src/server/**/*.(t|j)s'],
-  coveragePathIgnorePatterns: ['src/server/console', 'src/server/migration'],
+  collectCoverageFrom: ['./nest/**/*.(t|j)s'],
+  coveragePathIgnorePatterns: ['./nest/console', './nest/database'],
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
 };

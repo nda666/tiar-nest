@@ -8,6 +8,7 @@ import * as helmet from 'helmet';
 import { NestConfig } from './configs/config.interface';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from 'nest/app/utils/validation/validation.pipe';
+import { SwaggerConfig } from '@nest-config/swagger';
 
 declare const module: any;
 
@@ -18,22 +19,23 @@ async function bootstrap() {
 
   const nestConfig = configService.get<NestConfig>('nest');
 
+  const swaggerConfig = configService.get<SwaggerConfig>('swagger');
+
   app.useGlobalPipes(new ValidationPipe());
-  // app.use(helmet());
+
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
 
   const DocsConfig = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
-    .setVersion('1.0')
+    .setTitle(swaggerConfig?.title || '')
+    .setDescription(swaggerConfig?.description || '')
+    .setVersion(swaggerConfig?.version || '')
     .addTag('cats')
     .build();
   const document = SwaggerModule.createDocument(app, DocsConfig);
   // SwaggerModule.setup('api', app, document);
 
   const redocOptions: RedocOptions = {
-    title: 'Hello Nest',
-
+    title: swaggerConfig?.title || '',
     sortPropsAlphabetically: true,
     hideDownloadButton: false,
     hideHostname: false,

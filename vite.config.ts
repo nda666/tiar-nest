@@ -5,7 +5,7 @@ import { join } from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  root: join(__dirname, 'backend-client'),
+  root: join(__dirname, 'client'),
   // resolve: {
   //   alias: {
   //     '@render': join(__dirname, 'src/render'),
@@ -15,7 +15,7 @@ export default defineConfig({
   // },
   base: './',
   build: {
-    outDir: join(__dirname, 'dist/backend-client'),
+    outDir: join(__dirname, 'dist/client'),
     emptyOutDir: true,
   },
   server: {

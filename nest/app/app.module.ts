@@ -5,25 +5,24 @@ import { BullModule } from '@nestjs/bull';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { GraphQLModule } from '@nestjs/graphql';
-import { GraphqlConfig, NestConfig } from '../configs/config.interface';
+import { NestConfig } from '../configs/config.interface';
 import { UserModule } from './modules/user/user.module';
 import { StorageModule, DriverType } from '@codebrew/nestjs-storage';
 import { TranslatedExceptionsFilter } from 'nest/app/utils/language/translated-exceptions.filter';
 import {
   I18nModule,
   I18nJsonParser,
-  HeaderResolver,
   AcceptLanguageResolver,
 } from 'nestjs-i18n';
 import * as winston from 'winston';
 import 'winston-daily-rotate-file';
 
 import { AuthModule } from 'nest/app/modules/auth/auth.module';
-import { QueryResolver } from 'nest/app/utils/language/query.resolver';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
-import { config } from 'nest/configs';
 import { PrismaModule } from './providers/prisma/prisma.module';
 import { ValidationPipe } from 'nest/app/utils/validation/validation.pipe';
+
+import { jwt, config, graphql, GraphqlConfig } from '../configs';
 
 const dailyRotateFile = new winston.transports.DailyRotateFile({
   filename: 'application-%DATE%.log',
@@ -51,7 +50,7 @@ const errorStackTracerFormat = winston.format((info) => {
     ConfigModule.forRoot({
       envFilePath: ['.env', '../../.env', '.env.development'],
       isGlobal: true,
-      load: [config],
+      load: [config, jwt, graphql],
       cache: false,
     }),
 
@@ -115,7 +114,7 @@ const errorStackTracerFormat = winston.format((info) => {
      * Client frontend
      */
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '../backend-client'),
+      rootPath: join(__dirname, '..', '../client'),
     }),
 
     /**
@@ -131,12 +130,6 @@ const errorStackTracerFormat = winston.format((info) => {
      */
     WinstonModule.forRoot({
       format: winston.format.combine(
-        // format: combine(
-        //   errors({ stack: true }), // <-- use errors format
-        //   colorize(),
-        //   timestamp(),
-        //   prettyPrint()
-        // ),
         winston.format.errors({ stack: true }),
         winston.format.timestamp(),
         winston.format.prettyPrint(),
@@ -157,7 +150,7 @@ const errorStackTracerFormat = winston.format((info) => {
     }),
     PrismaModule,
     UserModule,
-    // AuthModule,
+    AuthModule,
   ],
   providers: [
     {

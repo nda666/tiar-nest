@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Auth {
+  accessToken: String!
+  refreshToken: String!
+  user: User!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -18,8 +24,15 @@ input IntFilter {
   notIn: [Int!]
 }
 
+input LoginInput {
+  """Registered email"""
+  email: String!
+  password: String!
+}
+
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  login(loginInput: LoginInput!): Auth!
   removeUser(id: Int!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
